@@ -269,11 +269,13 @@ var createPledge = function(name, payment) {
       dataType: 'json',
       success: function(data) {
         if ('paypal_url' in data) {
-          location.href = data.paypal_url
+          location.href = data.paypal_url;
         } else if ('bitpay_url' in data) {
-          location.href = data.bitpay_url
-        } else {
+          location.href = data.bitpay_url;
+        } else if (typeof REDIRECT_URL != 'undefined'){
           location.href = PLEDGE_URL + data.receipt_url;
+        } else {
+          location.href = REDIRECT_URL;
         }
       },
       error: function(data) {

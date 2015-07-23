@@ -96,13 +96,13 @@ var validateForm = function() {
 
 var validateBitcoinForm = function() {
   var amount = $('#amount_input').val() || null;
-  var firstName = $('#first_name_input').val() || null;  
-  var lastName = $('#last_name_input').val() || null;  
+  var firstName = $('#first_name_input').val() || null;
+  var lastName = $('#last_name_input').val() || null;
   var address = $('#address_input').val() || null;
   var city = $('#city_input').val() || null;
   var state = $('#state_input').val() || null;
   var zip = $('#zip_input').val() || null;
-    
+
   if (amount > 100) {
     showError( "Thank you for your generosity, but we are only able to accept Bitcoin donations of $100 or less");
     return false;
@@ -127,7 +127,7 @@ var validateBitcoinForm = function() {
   } else if (!zip) {
     showError( "Please enter your zip code");
     return false;
-  } else {  
+  } else {
     return true;
   }
 }
@@ -167,12 +167,12 @@ var showError = function(errorText) {
 var setLoading = function(loading) {
   if (loading) {
     $('#pledgeButton .pledgeText').hide();
-    $('#pledgeButton').off('click');  
+    $('#pledgeButton').off('click');
     $('#pledgeButton .spinner').show();
     $('#paypalButton').hide();
   } else {
     $('#pledgeButton .pledgeText').show();
-    $('#pledgeButton').on('click', pledge);      
+    $('#pledgeButton').on('click', pledge);
     $('#pledgeButton .spinner').hide();
     $('#paypalButton').show();
   }
@@ -206,18 +206,18 @@ var createPledge = function(name, payment) {
     pledgeType = 'CONDITIONAL';
   }
 
-  var firstName = $('#first_name_input').val() || null;  
-  var lastName = $('#last_name_input').val() || null;  
+  var firstName = $('#first_name_input').val() || null;
+  var lastName = $('#last_name_input').val() || null;
   var address = $('#address_input').val() || null;
   var city = $('#city_input').val() || null;
   var state = $('#state_input').val() || null;
   var zip = $('#zip_input').val() || null;
-  
+
   if (($("#requiredConfirmation").is(':checked') == false ) && ('BITCOIN' in payment) ) {
-    console.log('Trying to pay with BITCOIN without a confirmation') 
+    console.log('Trying to pay with BITCOIN without a confirmation')
     return;
   }
-  
+
   var data = {
     email: $('#email_input').val(),
     phone: $('#phone_input').val(),
@@ -232,11 +232,11 @@ var createPledge = function(name, payment) {
     team: urlParams['team'] || readCookie("last_team_key") || '',
     payment: payment
   };
-  
+
   if ($("#requiredConfirmation").is(':checked')) {
     data['bitcoinConfirm'] = true;
-  }  
-  
+  }
+
   if (firstName) {
     data['firstName'] = firstName;
   }
@@ -260,7 +260,7 @@ var createPledge = function(name, payment) {
   if (state) {
     data['state'] = state;
   }
-  
+
   $.ajax({
       type: 'POST',
       url: request_url,
@@ -300,10 +300,10 @@ $(document).ready(function() {
   $('#pledgeButton').on('click', pledge);
 
   $('#paypalButton').on('click', paypalPledge);
-  
+
   $('#bitcoinButton').on('click', bitcoinPledge);
-  
-  $.get(PLEDGE_URL + '/r/payment_config', {}, function(){}, "json").done(function(pConf) {    
+
+  $.get(PLEDGE_URL + '/r/payment_config', {}, function(){}, "json").done(function(pConf) {
       paymentConfig = pConf;
       stripeConfig = {
         key: paymentConfig.stripePublicKey,

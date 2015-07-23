@@ -25,7 +25,11 @@ limitations under the License.
 
 
 // ******************************************************************************
-//   BE CAREFUL WITH THIS FILE. IT IS INCLUDED IN teams and website repositories
+//  BE CAREFUL WITH THIS FILE. IT IS INCLUDED IN teams and this repo. Not clear why.
+//  It's also fairly date part of MAYDAY's infrastructure.  At the time of this writting (20150723)
+//  It is also hosted in https://github.com/MayOneUS/mayday-2.0-frontend/, I cannot seem to expire
+//  google app engine caching
+//
 // ******************************************************************************
 
 var getUrlParams = function() {
